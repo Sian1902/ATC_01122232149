@@ -1,0 +1,55 @@
+<nav class="navbar bg-body-tertiary px-4 py-3 mb-4 border-bottom shadow-sm">
+  <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap">
+    
+    <!-- Logo and Navigation Tabs -->
+    <div class="d-flex align-items-center gap-4 flex-wrap">
+      <!-- App Title -->
+      <div class="d-flex align-items-center">
+        <span class="navbar-brand mb-0 fs-3 fw-bold text-primary">
+          <i class="bi bi-calendar2-range me-2"></i> EventSync
+        </span>
+      </div>
+
+      <!-- Tabs -->
+      <ul class="nav nav-pills bg-light rounded-pill px-2 py-1 gap-2">
+        <li class="nav-item">
+          <button 
+            class="nav-link d-flex align-items-center gap-2 rounded-pill px-3 py-2 fw-semibold"
+            [class.active]="activeTab === 'home'"
+            (click)="onTabClick('home')"
+          >
+            <i class="bi bi-house-door fs-5"></i>
+            <span class="d-none d-sm-inline">Home</span>
+          </button>
+        </li>
+
+        <li class="nav-item">
+          <button 
+            class="nav-link d-flex align-items-center gap-2 rounded-pill px-3 py-2 fw-semibold"
+            [class.active]="activeTab === 'saved'"
+            (click)="onTabClick('saved')"
+          >
+            <i class="bi bi-bookmark-check fs-5"></i>
+            <span class="d-none d-sm-inline">Saved</span>
+          </button>
+        </li>
+
+        <li class="nav-item">
+          <button 
+            class="nav-link d-flex align-items-center gap-2 rounded-pill px-3 py-2 fw-semibold"
+            [class.active]="activeTab === 'booked'"
+            (click)="onTabClick('booked')"
+          >
+            <i class="bi bi-ticket-perforated fs-5"></i>
+            <span class="d-none d-sm-inline">Booked</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="d-flex mt-3 mt-md-0" style="min-width: 280px; max-width: 320px;">
+      <app-search-bar (searchChanged)="onSearchChanged($event)"></app-search-bar>
+    </div>
+  </div>
+</nav>

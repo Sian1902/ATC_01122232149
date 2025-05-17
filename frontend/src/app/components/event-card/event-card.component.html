@@ -1,0 +1,65 @@
+<div 
+  class="card" 
+  style="max-width: 320px; cursor: pointer; overflow: hidden;"
+  (click)="openDetails()"
+  (mouseenter)="showDescription = true" 
+  (mouseleave)="showDescription = false"
+>
+  <div style="position: relative; height: 180px; overflow: hidden;">
+    <img 
+      [src]="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3DNasCvfOLMIxJyQtbNq7EfLkWnMazHE9xw&s'"
+      alt="Event Image"
+      [style.filter]="showDescription ? 'blur(4px)' : 'none'"
+      style="width: 100%; height: 180px; object-fit: cover; transition: filter 0.3s ease;"
+    >
+    <div 
+      *ngIf="showDescription" 
+      style="
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        text-align: center;
+        font-size: 1rem;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+        pointer-events: none;
+      "
+    >
+      {{ event.description }}
+    </div>
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ event.title | slice:0:15 }}{{ event.title.length > 15 ? '...' : '' }}
+    </h5>
+    <p class="card-text">{{ event.date }}</p>
+  </div>
+
+  <div class="card-footer d-flex justify-content-between bg-light">
+    <button 
+      class="btn btn-primary btn-sm" 
+      (click)="bookClicked(); $event.stopPropagation()"
+    >
+      {{ event.isBooked ? 'Booked' : 'Book Now' }}
+    </button>
+
+    <button 
+      class="btn btn-sm p-0" 
+      style="border: none; background: transparent;"  
+      (click)="saveClicked(); $event.stopPropagation()" 
+      aria-label="Save event"
+    >
+      <i 
+        class="bi" 
+        [ngClass]="event.isSaved ? 'bi-heart-fill text-danger fs-4' : 'bi-heart fs-4'"
+        style="cursor: pointer;"
+      ></i>
+    </button>
+  </div>
+</div>

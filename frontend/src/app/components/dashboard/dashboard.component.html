@@ -1,0 +1,9 @@
+<app-nav-bar 
+  (searchChanged)="onSearch($event)"
+  (tabClicked)="onTabChanged($event)">
+</app-nav-bar>
+
+<app-event-grid 
+  [filter]="searchQuery"
+  [selectedTab]="selectedTab">
+</app-event-grid>

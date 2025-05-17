@@ -1,0 +1,94 @@
+<!-- Event Details Component -->
+<div *ngIf="event; else loadingTpl" class="d-flex justify-content-center min-vh-100 bg-light bg-gradient py-5">
+  <div class="card border-0 shadow-lg rounded-3 p-4 p-md-5 w-100" style="max-width: 800px;">
+    
+  
+    <!-- Event Title -->
+    <h1 class="fw-bold text-primary mb-3">{{ event.title }}</h1>
+
+    <!-- Event Image -->
+    <div class="mb-4">
+      <img 
+        [src]="event.imageUrl || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3DNasCvfOLMIxJyQtbNq7EfLkWnMazHE9xw&s'" 
+        alt="Event Image" 
+        class="img-fluid rounded-3 w-100" 
+        style="height: 350px; object-fit: cover;"
+      >
+    </div>
+
+    <!-- Event Details (Date, Location) -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-6">
+        <div class="d-flex align-items-center">
+          <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+            <i class="bi bi-calendar2-range  fs-5"></i>
+          </div>
+          <div>
+            <h5 class="fw-semibold mb-1">Date & Time</h5>
+            <p class="mb-0">{{ event.date | date: 'medium' }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex align-items-center">
+          <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+            <i class="bi bi-geo-alt  fs-5"></i>
+          </div>
+          <div>
+            <h5 class="fw-semibold mb-1">Location</h5>
+            <p class="mb-0">{{ event.location || 'To be determined' }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- Category -->
+  <div class="col-md-6">
+    <div class="d-flex align-items-center">
+      <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+        <i class="bi bi-tags  fs-5"></i>
+      </div>
+      <div>
+        <h5 class="fw-semibold mb-1">Category</h5>
+        <p class="mb-0">{{ event.category?.name || 'General' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+
+    <!-- Event Description -->
+    <div class="mb-4">
+      <h4 class="fw-semibold mb-3">
+        <i class="bi bi-text-paragraph text-primary me-2"></i>Description
+      </h4>
+      <p class="text-muted">{{ event.description }}</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex flex-column flex-md-row gap-3 mt-4">
+      <button class="btn btn-outline-primary w-100 py-2" (click)="onSaveEvent()">
+        <i class="bi bi-bookmark me-2"></i>
+        {{ event.isSaved ? 'Unsave Event' : 'Save Event' }}
+      </button>
+      <button 
+        class="btn btn-primary w-100 py-2" 
+        [disabled]="event.isBooked" 
+        (click)="onBookEvent()"
+      >
+        <i class="bi bi-ticket-perforated me-2"></i>
+        {{ event.isBooked ? 'Booked' : 'Book Now' }}
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Loading Template -->
+<ng-template #loadingTpl>
+  <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="text-center">
+      <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+      <h4 class="fw-semibold">Loading event details...</h4>
+      <p class="text-muted">Please wait while we fetch the event information.</p>
+    </div>
+  </div>
+</ng-template>

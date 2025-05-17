@@ -1,0 +1,11 @@
+<div class="container py-4">
+  <div class="row row-cols-3 row-cols-md-4 g-4">
+    <div class="col" *ngFor="let event of events$ | async">
+      <app-event-card
+        [event]="event"
+        (onSave)="toggleSave($event)"
+        (onBook)="bookEvent($event)">
+      </app-event-card>
+    </div>
+  </div>
+</div>
